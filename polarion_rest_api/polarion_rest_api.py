@@ -61,16 +61,18 @@ class PolarionRestApi(PolarionBase):
     """
     
     def __init__(self, base_url: str = "https://testdrive.polarion.com/polarion/rest/v1",
-                 token: Optional[str] = None):
+                 token: Optional[str] = None,
+                 debug_request: bool = False):
         """
         Initialize Polarion API client.
         
         Args:
             base_url: Base URL for Polarion REST API
             token: Bearer token for authentication (can be set later using set_token())
+            debug_request: Enable debug mode to print request details (default: False)
             
         Example:
-            api = PolarionRestApi(token="your_bearer_token")
+            api = PolarionRestApi(token="your_bearer_token", debug_request=True)
             # Access work items module
             work_items = api.work_items.get_work_items("project_id")
             # Access work item comments module
@@ -138,7 +140,7 @@ class PolarionRestApi(PolarionBase):
             # Access document attachments module
             attachments = api.document_attachments.get_document_attachments("project_id", "space_id", "document_name")
         """
-        super().__init__(base_url, token)
+        super().__init__(base_url, token, debug_request)
         self._load_modules()
     
     def _load_modules(self):
@@ -148,205 +150,205 @@ class PolarionRestApi(PolarionBase):
         """
         try:
             from .modules.work_items import WorkItems
-            self.work_items = WorkItems(self.base_url, self._token)
+            self.work_items = WorkItems(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.work_item_comments import WorkItemComments
-            self.work_item_comments = WorkItemComments(self.base_url, self._token)
+            self.work_item_comments = WorkItemComments(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.work_item_attachments import WorkItemAttachments
-            self.work_item_attachments = WorkItemAttachments(self.base_url, self._token)
+            self.work_item_attachments = WorkItemAttachments(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.work_item_approvals import WorkItemApprovals
-            self.work_item_approvals = WorkItemApprovals(self.base_url, self._token)
+            self.work_item_approvals = WorkItemApprovals(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.work_item_work_records import WorkItemWorkRecords
-            self.work_item_work_records = WorkItemWorkRecords(self.base_url, self._token)
+            self.work_item_work_records = WorkItemWorkRecords(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.users import Users
-            self.users = Users(self.base_url, self._token)
+            self.users = Users(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.user_groups import UserGroups
-            self.user_groups = UserGroups(self.base_url, self._token)
+            self.user_groups = UserGroups(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.test_steps import TestSteps
-            self.test_steps = TestSteps(self.base_url, self._token)
+            self.test_steps = TestSteps(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.test_step_results import TestStepResults
-            self.test_step_results = TestStepResults(self.base_url, self._token)
+            self.test_step_results = TestStepResults(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.test_step_result_attachments import TestStepResultAttachments
-            self.test_step_result_attachments = TestStepResultAttachments(self.base_url, self._token)
+            self.test_step_result_attachments = TestStepResultAttachments(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.test_runs import TestRuns
-            self.test_runs = TestRuns(self.base_url, self._token)
+            self.test_runs = TestRuns(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.test_run_comments import TestRunComments
-            self.test_run_comments = TestRunComments(self.base_url, self._token)
+            self.test_run_comments = TestRunComments(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.test_run_attachments import TestRunAttachments
-            self.test_run_attachments = TestRunAttachments(self.base_url, self._token)
+            self.test_run_attachments = TestRunAttachments(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.test_records import TestRecords
-            self.test_records = TestRecords(self.base_url, self._token)
+            self.test_records = TestRecords(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.test_record_attachments import TestRecordAttachments
-            self.test_record_attachments = TestRecordAttachments(self.base_url, self._token)
+            self.test_record_attachments = TestRecordAttachments(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.roles import Roles
-            self.roles = Roles(self.base_url, self._token)
+            self.roles = Roles(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.revisions import Revisions
-            self.revisions = Revisions(self.base_url, self._token)
+            self.revisions = Revisions(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.projects import Projects
-            self.projects = Projects(self.base_url, self._token)
+            self.projects = Projects(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.project_templates import ProjectTemplates
-            self.project_templates = ProjectTemplates(self.base_url, self._token)
+            self.project_templates = ProjectTemplates(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.plans import Plans
-            self.plans = Plans(self.base_url, self._token)
+            self.plans = Plans(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.pages import Pages
-            self.pages = Pages(self.base_url, self._token)
+            self.pages = Pages(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.page_attachments import PageAttachments
-            self.page_attachments = PageAttachments(self.base_url, self._token)
+            self.page_attachments = PageAttachments(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.linked_work_items import LinkedWorkItems
-            self.linked_work_items = LinkedWorkItems(self.base_url, self._token)
+            self.linked_work_items = LinkedWorkItems(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.linked_oslc_resources import LinkedOslcResources
-            self.linked_oslc_resources = LinkedOslcResources(self.base_url, self._token)
+            self.linked_oslc_resources = LinkedOslcResources(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.jobs import Jobs
-            self.jobs = Jobs(self.base_url, self._token)
+            self.jobs = Jobs(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.icons import Icons
-            self.icons = Icons(self.base_url, self._token)
+            self.icons = Icons(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.externally_linked_work_items import ExternallyLinkedWorkItems
-            self.externally_linked_work_items = ExternallyLinkedWorkItems(self.base_url, self._token)
+            self.externally_linked_work_items = ExternallyLinkedWorkItems(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.feature_selections import FeatureSelections
-            self.feature_selections = FeatureSelections(self.base_url, self._token)
+            self.feature_selections = FeatureSelections(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.enumerations import Enumerations
-            self.enumerations = Enumerations(self.base_url, self._token)
+            self.enumerations = Enumerations(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.documents import Documents
-            self.documents = Documents(self.base_url, self._token)
+            self.documents = Documents(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.document_parts import DocumentParts
-            self.document_parts = DocumentParts(self.base_url, self._token)
+            self.document_parts = DocumentParts(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.document_comments import DocumentComments
-            self.document_comments = DocumentComments(self.base_url, self._token)
+            self.document_comments = DocumentComments(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.document_attachments import DocumentAttachments
-            self.document_attachments = DocumentAttachments(self.base_url, self._token)
+            self.document_attachments = DocumentAttachments(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
         
         try:
             from .modules.collections import Collections
-            self.collections = Collections(self.base_url, self._token)
+            self.collections = Collections(self.base_url, self._token, self.debug_request)
         except ImportError:
             pass
     
