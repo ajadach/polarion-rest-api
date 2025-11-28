@@ -1,0 +1,21 @@
+include README.md
+include LICENSE
+include requirements.txt
+recursive-include polarion-rest-api *.py
+exclude tests
+recursive-exclude tests *
+exclude .git
+recursive-exclude .git *
+exclude __pycache__
+recursive-exclude __pycache__ *
+exclude .pytest_cache
+recursive-exclude .pytest_cache *
+exclude .idea
+recursive-exclude .idea *
+exclude data
+recursive-exclude data *
+exclude prompt
+recursive-exclude prompt *
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *~
