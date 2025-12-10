@@ -12,7 +12,7 @@ class PolarionBase:
     Stores authentication token and provides common HTTP methods.
     """
     
-    def __init__(self, base_url: str, token: Optional[str] = None, debug_request: bool = False):
+    def __init__(self, base_url: str, token: Optional[str] = None, debug_request: bool = False, debug_response: bool = False):
         """
         Initialize the base class.
         
@@ -20,10 +20,12 @@ class PolarionBase:
             base_url: Base URL for Polarion REST API (e.g., 'https://testdrive.polarion.com/polarion/rest/v1')
             token: Bearer token for authentication
             debug_request: Enable debug mode to print request details (default: False)
+            debug_response: Enable debug mode to print response details (default: False)
         """
         self.base_url = base_url.rstrip('/')
         self._token = token
         self.debug_request = debug_request
+        self.debug_response = debug_response
         self._session = requests.Session()
         self._update_headers()
     
@@ -121,6 +123,47 @@ class PolarionBase:
                 print(f"  {key}: {value}")
         print("="*70 + "\n")
     
+    def _print_response_debug(self, method: str, response: requests.Response):
+        """
+        Print debug information about an HTTP response.
+        
+        Args:
+            method: HTTP method name (GET, POST, PATCH, DELETE)
+            response: Response object from requests
+        """
+        if not self.debug_response:
+            return
+        
+        print("\n" + "="*70)
+        print(f"POLARION API RESPONSE (_{method.lower()} method):")
+        print("="*70)
+        print(f"Status Code: {response.status_code} {response.reason}")
+        print(f"URL: {response.url}")
+        
+        # Print response headers
+        print("\nResponse Headers:")
+        for key, value in response.headers.items():
+            print(f"  {key}: {value}")
+        
+        # Print response body
+        print("\nResponse Body:")
+        try:
+            # Try to parse as JSON and pretty print
+            if response.headers.get('content-type', '').startswith('application/json'):
+                import json as json_lib
+                json_response = response.json()
+                print(json_lib.dumps(json_response, indent=2))
+            else:
+                # Print as text for non-JSON responses
+                print(response.text[:1000])  # Limit to first 1000 chars
+                if len(response.text) > 1000:
+                    print(f"\n... (truncated, total length: {len(response.text)} chars)")
+        except Exception as e:
+            print(f"Could not parse response body: {e}")
+            print(f"Raw content (first 500 chars): {response.text[:500]}")
+        
+        print("="*70 + "\n")
+    
     def _apply_default_fields(self, user_fields: Optional[Dict[str, str]] = None) -> Dict[str, str]:
         """
         Apply default fields configuration for GET requests.
@@ -192,6 +235,7 @@ class PolarionBase:
         url = f"{self.base_url}/{endpoint.lstrip('/')}"
         self._print_request_debug('GET', url, params=params)
         response = self._session.get(url, params=params)
+        self._print_response_debug('GET', response)
         return response
     
     def _post(self, endpoint: str, data: Optional[Dict[str, Any]] = None, 
@@ -220,6 +264,7 @@ class PolarionBase:
             # Remove Content-Type for multipart or form data
             headers = {k: v for k, v in self._session.headers.items() if k.lower() != 'content-type'}
         response = self._session.post(url, data=data, json=json, files=files, headers=headers, params=params)
+        self._print_response_debug('POST', response)
         return response
     
     def _patch(self, endpoint: str, data: Optional[Dict[str, Any]] = None,
@@ -248,6 +293,7 @@ class PolarionBase:
             # Remove Content-Type for multipart or form data
             headers = {k: v for k, v in self._session.headers.items() if k.lower() != 'content-type'}
         response = self._session.patch(url, data=data, json=json, files=files, headers=headers, params=params)
+        self._print_response_debug('PATCH', response)
         return response
     
     def _delete(self, endpoint: str, json: Optional[Dict[str, Any]] = None) -> requests.Response:
@@ -264,6 +310,7 @@ class PolarionBase:
         url = f"{self.base_url}/{endpoint.lstrip('/')}"
         self._print_request_debug('DELETE', url, json_data=json)
         response = self._session.delete(url, json=json)
+        self._print_response_debug('DELETE', response)
         return response
     
     def _delete_with_body(self, endpoint: str, json: Optional[Dict[str, Any]] = None) -> requests.Response:
