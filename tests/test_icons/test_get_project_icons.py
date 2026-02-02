@@ -266,7 +266,7 @@ class TestGetProjectIcons:
         
         # Verify default fields are applied
         expected_fields = [
-            'collections', 'categories', 'documents', 'document_attachments',
+            'categories', 'documents', 'document_attachments',
             'document_comments', 'document_parts', 'enumerations', 'globalroles',
             'icons', 'jobs', 'linkedworkitems', 'externallylinkedworkitems',
             'linkedoslcresources', 'pages', 'page_attachments', 'plans',
@@ -318,8 +318,8 @@ class TestGetProjectIcons:
         assert params['fields[projects]'] == 'id,attributes.name'
         
         # Verify other default fields are still present
-        assert 'fields[collections]' in params
-        assert params['fields[collections]'] == '@all'
+        assert 'fields[categories]' in params
+        assert params['fields[categories]'] == '@all'
         
         print("\n✓ Mock: Custom fields override defaults correctly")
     
@@ -360,8 +360,8 @@ class TestGetProjectIcons:
         assert params['fields[icons]'] == 'id,attributes'
         
         # Verify default fields are still present for non-overridden fields
-        assert 'fields[collections]' in params
-        assert params['fields[collections]'] == '@all'
+        assert 'fields[categories]' in params
+        assert params['fields[categories]'] == '@all'
         
         # Verify endpoint
         assert 'projects/projectId/enumerations/icons' in call_args[0][0]

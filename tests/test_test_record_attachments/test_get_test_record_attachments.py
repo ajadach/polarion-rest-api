@@ -190,7 +190,7 @@ class TestGetTestRecordAttachments:
         params = call_args[1].get('params', {})
         
         # Verify some key default fields
-        assert params.get('fields[collections]') == '@all'
+        assert params.get('fields[categories]') == '@all'
         assert params.get('fields[categories]') == '@all'
         assert params.get('fields[documents]') == '@all'
         assert params.get('fields[testrecord_attachments]') == '@all'
@@ -229,7 +229,7 @@ class TestGetTestRecordAttachments:
         assert params.get('fields[users]') == 'id,name'
         
         # Other fields should still be @all
-        assert params.get('fields[collections]') == '@all'
+        assert params.get('fields[categories]') == '@all'
         assert params.get('fields[documents]') == '@all'
     
     def test_get_test_record_attachments_with_include_parameter(self, mock_test_record_attachments_api):
@@ -555,7 +555,7 @@ class TestGetTestRecordAttachments:
         params = call_args[1].get('params', {})
         
         # Should have default fields
-        assert 'fields[collections]' in params
+        assert 'fields[categories]' in params
         # Should not have pagination, include or revision
         assert 'page[size]' not in params
         assert 'page[number]' not in params

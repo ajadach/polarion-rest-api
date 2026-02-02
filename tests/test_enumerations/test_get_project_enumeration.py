@@ -155,6 +155,6 @@ class TestGetProjectEnumeration:
         params = call_args[1]['params']
         
         # Check that default fields are present
-        assert 'fields[collections]' in params
-        assert params['fields[collections]'] == '@all'
+        assert 'fields[categories]' in params
+        assert params['fields[categories]'] == '@all'
         print("\n✓ Mock: Default fields applied automatically")

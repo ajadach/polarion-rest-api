@@ -71,7 +71,7 @@ class TestGetDocumentComments:
         assert params['fields[document_comments]'] == 'author,created,id,resolved,text'
         assert params['fields[users]'] == 'id,name'
         # Other default fields should remain
-        assert params['fields[collections]'] == '@all'
+        assert params['fields[categories]'] == '@all'
     
     def test_get_document_comments_with_include(self, mock_document_comments_api):
         """Test get_document_comments with include parameter."""
@@ -136,7 +136,7 @@ class TestGetDocumentComments:
         assert params['page[number]'] == 3
         assert params['fields[document_comments]'] == 'author,id,text'
         assert params['fields[users]'] == 'id,name,email'
-        assert params['fields[collections]'] == '@all'  # Default field remains
+        assert params['fields[categories]'] == '@all'  # Default field remains
         assert params['include'] == 'author'
         assert params['revision'] == 'rev456'
     

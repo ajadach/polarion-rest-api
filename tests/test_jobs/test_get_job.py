@@ -231,8 +231,8 @@ class TestGetJob:
         params = call_args[1]['params']
         
         # Verify default fields are applied
-        assert 'fields[collections]' in params
-        assert params['fields[collections]'] == '@all'
+        assert 'fields[categories]' in params
+        assert params['fields[categories]'] == '@all'
         assert 'fields[jobs]' in params
         assert params['fields[jobs]'] == '@all'
         print("\n✓ Mock: Default fields applied automatically")
@@ -269,8 +269,8 @@ class TestGetJob:
         assert params['fields[documents]'] == 'title'
         
         # Verify other defaults still apply
-        assert 'fields[collections]' in params
-        assert params['fields[collections]'] == '@all'
+        assert 'fields[categories]' in params
+        assert params['fields[categories]'] == '@all'
         print("\n✓ Mock: Custom fields override defaults correctly")
     
     def test_get_job_with_include(self, mock_jobs_api):
