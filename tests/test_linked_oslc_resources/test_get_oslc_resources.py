@@ -226,8 +226,8 @@ class TestGetOslcResources:
         # Verify default fields are applied
         assert 'fields[linkedoslcresources]' in params
         assert params['fields[linkedoslcresources]'] == '@all'
-        assert 'fields[collections]' in params
-        assert params['fields[collections]'] == '@all'
+        assert 'fields[categories]' in params
+        assert params['fields[categories]'] == '@all'
         print("\n✓ Mock: Default fields applied automatically")
     
     def test_get_oslc_resources_with_custom_fields(self, mock_linked_oslc_resources_api):
@@ -759,5 +759,5 @@ class TestGetOslcResources:
         assert params['fields[linkedoslcresources]'] == 'label'
         
         # Verify default fields still apply
-        assert 'fields[collections]' in params
+        assert 'fields[categories]' in params
         print("\n✓ Mock: Pagination and fields parameters merged correctly")

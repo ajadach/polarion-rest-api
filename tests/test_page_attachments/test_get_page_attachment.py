@@ -176,7 +176,7 @@ class TestGetPageAttachment:
         
         # Check that all default collection fields are set to @all
         expected_collections = [
-            'collections', 'categories', 'documents', 'document_attachments',
+            'categories', 'documents', 'document_attachments',
             'document_comments', 'document_parts', 'enumerations', 'globalroles',
             'icons', 'jobs', 'linkedworkitems', 'externallylinkedworkitems',
             'linkedoslcresources', 'pages', 'page_attachments', 'plans',

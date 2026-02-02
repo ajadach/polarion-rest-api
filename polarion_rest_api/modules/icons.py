@@ -35,7 +35,7 @@ class Icons(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates
@@ -76,7 +76,7 @@ class Icons(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates
@@ -110,7 +110,7 @@ class Icons(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates
@@ -146,7 +146,7 @@ class Icons(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates
@@ -189,7 +189,7 @@ class Icons(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates
@@ -227,7 +227,7 @@ class Icons(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates
@@ -272,7 +272,7 @@ class Icons(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates

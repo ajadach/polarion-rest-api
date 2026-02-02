@@ -9,7 +9,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
     name='polarion-rest-api',
-    version='0.1.0',
+    version='0.1.1',
     author='Artur Ziolkowski',
     author_email='artur.k.ziolkowski@gmail.com',
     description='Python client library for Polarion REST API',

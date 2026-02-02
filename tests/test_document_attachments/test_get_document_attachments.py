@@ -211,8 +211,8 @@ class TestGetDocumentAttachments:
         call_args = mock_document_attachments_api._session.get.call_args
         params = call_args[1]['params']
         # Check for some default fields
-        assert 'fields[collections]' in params
-        assert params['fields[collections]'] == '@all'
+        assert 'fields[categories]' in params
+        assert params['fields[categories]'] == '@all'
         assert 'fields[document_attachments]' in params
         assert params['fields[document_attachments]'] == '@all'
     

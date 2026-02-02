@@ -264,7 +264,7 @@ class TestGetProjectDefaultFields:
         
         # Verify all default fields are present in fields[name] format
         expected_fields = [
-            "collections", "categories", "documents", "document_attachments",
+            "categories", "documents", "document_attachments",
             "document_comments", "document_parts", "enumerations", "globalroles",
             "icons", "jobs", "linkedworkitems", "externallylinkedworkitems",
             "linkedoslcresources", "pages", "page_attachments", "plans",

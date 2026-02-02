@@ -51,7 +51,7 @@ class TestGetDocumentComment:
         # Custom fields should override default
         assert params['fields[document_comments]'] == 'author,id,resolved,text'
         # Other default fields should remain
-        assert params['fields[collections]'] == '@all'
+        assert params['fields[categories]'] == '@all'
         assert params['fields[documents]'] == '@all'
     
     def test_get_document_comment_with_include(self, mock_document_comments_api):
@@ -116,7 +116,7 @@ class TestGetDocumentComment:
         params = call_args[1]['params']
         assert params['fields[document_comments]'] == 'author,id,resolved,text'
         assert params['fields[users]'] == 'id,name,email'
-        assert params['fields[collections]'] == '@all'  # Default field remains
+        assert params['fields[categories]'] == '@all'  # Default field remains
         assert params['include'] == 'author'
         assert params['revision'] == 'rev789'
     

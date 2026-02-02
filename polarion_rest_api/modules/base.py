@@ -66,7 +66,8 @@ class PolarionBase:
                             params: Optional[Dict[str, Any]] = None,
                             json_data: Optional[Dict[str, Any]] = None,
                             form_data: Optional[Dict[str, Any]] = None,
-                            files: Optional[Any] = None):
+                            files: Optional[Any] = None,
+                            custom_headers: Optional[Dict[str, str]] = None):
         """
         Print debug information about an HTTP request.
         
@@ -77,6 +78,7 @@ class PolarionBase:
             json_data: JSON body data
             form_data: Form data
             files: Files for upload
+            custom_headers: Custom headers that override session headers
         """
         if not self.debug_request:
             return
@@ -110,8 +112,10 @@ class PolarionBase:
             print(f"\nFiles: {files}")
         
         # Print headers with token masking
+        # Use custom headers if provided, otherwise use session headers
+        headers_to_print = custom_headers if custom_headers is not None else self._session.headers
         print("\nHeaders:")
-        for key, value in self._session.headers.items():
+        for key, value in headers_to_print.items():
             if key.lower() == 'authorization':
                 # Mask token for security
                 if value.startswith('Bearer '):
@@ -256,14 +260,24 @@ class PolarionBase:
             Response object
         """
         url = f"{self.base_url}/{endpoint.lstrip('/')}"
-        self._print_request_debug('POST', url, params=params, json_data=json, form_data=data, files=files)
         
-        # Remove Content-Type header for multipart/form-data (requests will set it automatically)
-        headers = None
-        if files is not None or (data is not None and json is None):
-            # Remove Content-Type for multipart or form data
-            headers = {k: v for k, v in self._session.headers.items() if k.lower() != 'content-type'}
-        response = self._session.post(url, data=data, json=json, files=files, headers=headers, params=params)
+        # For multipart/form-data uploads, we must NOT send Content-Type: application/json
+        # Instead, we let requests library automatically set the correct multipart boundary
+        # We need to temporarily remove Content-Type from session, make the request, then restore it
+        if files is not None:
+            # Save original Content-Type
+            original_content_type = self._session.headers.pop('Content-Type', None)
+            
+            self._print_request_debug('POST', url, params=params, json_data=json, form_data=data, files=files, custom_headers=dict(self._session.headers))
+            response = self._session.post(url, data=data, json=json, files=files, params=params)
+            
+            # Restore original Content-Type
+            if original_content_type:
+                self._session.headers['Content-Type'] = original_content_type
+        else:
+            self._print_request_debug('POST', url, params=params, json_data=json, form_data=data, files=files)
+            response = self._session.post(url, data=data, json=json, files=files, params=params)
+        
         self._print_response_debug('POST', response)
         return response
     

@@ -2,7 +2,7 @@
 Projects module for Polarion REST API.
 Handles all Projects related endpoints.
 """
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 import requests
 from .base import PolarionBase
 
@@ -35,7 +35,7 @@ class Projects(PolarionBase):
     
     def delete_project_test_parameter_definitions(self,
                                                   project_id: str,
-                                                  test_param_definitions: list[Dict[str, str]]) -> requests.Response:
+                                                  test_param_definitions: List[Dict[str, str]]) -> requests.Response:
         """
         Deletes a list of Test Parameter Definitions for the specified Project.
         
@@ -103,7 +103,7 @@ class Projects(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates
@@ -156,7 +156,7 @@ class Projects(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates
@@ -201,7 +201,7 @@ class Projects(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates
@@ -245,7 +245,7 @@ class Projects(PolarionBase):
                    while all other collections remain set to their default "@all" value.
                    
                    Default fields include:
-                   - collections, categories, documents, document_attachments, document_comments
+                   - categories, documents, document_attachments, document_comments
                    - document_parts, enumerations, globalroles, icons, jobs
                    - linkedworkitems, externallylinkedworkitems, linkedoslcresources
                    - pages, page_attachments, plans, projectroles, projects, projecttemplates
