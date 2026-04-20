@@ -3,7 +3,7 @@ Polarion REST API Python Client Library
 """
 
 __version__ = '1.0.0'
-__author__ = 'Artur Ziółkowski'
+__author__ = 'Artur Ziolkowski'
 __email__ = 'artur.k.ziolkowski@gmail.com'
 
 from .polarion_rest_api import PolarionRestApi
