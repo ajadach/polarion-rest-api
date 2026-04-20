@@ -7,7 +7,7 @@ Python client library for Polarion REST API, providing easy access to all Polari
 - Full coverage of Polarion REST API endpoints
 - Type hints for better IDE support
 - Comprehensive error handling
-- Easy authentication management
+- Easy authentication management using bearer token
 - Well-documented API
 
 ## Installation
@@ -26,11 +26,10 @@ pip install polarion-rest-api[dev]
 ```python
 from polarion_rest_api import PolarionRestApi
 
-# Initialize the API client
+# Initialize the API client using a bearer token
 api = PolarionRestApi(
     base_url="https://your-polarion-instance.com/polarion/rest/v1",
-    username="your_username",
-    password="your_password"
+    token="your_bearer_token"
 )
 
 # Get a project
